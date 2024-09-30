@@ -8,7 +8,7 @@ pip install mediapipe
 
 If you don't have git installed, you can install it from [here](https://git-scm.com/downloads). The project can then be cloned (or downloaded):
 ```
-git clone https://github.com/ihendrikson/JIP2024-Mediapipe.git
+git clone git@github.com:ihendrikson/JIP2024-Mediapipe.git
 ```
 
 ## Running the project
