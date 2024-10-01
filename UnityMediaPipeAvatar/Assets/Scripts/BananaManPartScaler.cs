@@ -3,31 +3,31 @@ using UnityEngine.UI;
 
 public class BananaManPartScaler : MonoBehaviour
 {
-    // 引用Banana Man的主要部分Transform
+    // To quote the main part of Banana Man's Transform
     public Transform body;
     public Transform leftArm;
     public Transform rightArm;
     public Transform leftLeg;
     public Transform rightLeg;
 
-    // Slider控件，用于控制不同部分的大小
+    // Slider control to control the size of the different sections
     public Slider bodySizeSlider;
     public Slider leftArmSizeSlider;
     public Slider rightArmSizeSlider;
     public Slider leftLegSizeSlider;
     public Slider rightLegSizeSlider;
 
-    // 初始化
+    // initialisation
     void Start()
     {
-        // 设置初始的Slider数值
-        bodySizeSlider.value = body.localScale.x;  // 初始化身体的Slider
-        leftArmSizeSlider.value = leftArm.localScale.x;  // 初始化左臂的Slider
-        rightArmSizeSlider.value = rightArm.localScale.x;  // 初始化右臂的Slider
-        leftLegSizeSlider.value = leftLeg.localScale.x;  // 初始化左腿的Slider
-        rightLegSizeSlider.value = rightLeg.localScale.x;  // 初始化右腿的Slider
+        // Set the initial Slider value
+        bodySizeSlider.value = body.localScale.x;  // Initialising the body Slider
+        leftArmSizeSlider.value = leftArm.localScale.x;  // Initialise the Slider for the left arm
+        rightArmSizeSlider.value = rightArm.localScale.x;  // Initialise the Slider for the right arm
+        leftLegSizeSlider.value = leftLeg.localScale.x;  // Initialise the Slider for the left leg
+        rightLegSizeSlider.value = rightLeg.localScale.x;  // Initialise the Slider for the right leg
 
-        // 绑定Slider值变化事件
+        // Bind Slider value change event
         bodySizeSlider.onValueChanged.AddListener(ChangeBodySize);
         leftArmSizeSlider.onValueChanged.AddListener(ChangeLeftArmSize);
         rightArmSizeSlider.onValueChanged.AddListener(ChangeRightArmSize);
@@ -35,7 +35,7 @@ public class BananaManPartScaler : MonoBehaviour
         rightLegSizeSlider.onValueChanged.AddListener(ChangeRightLegSize);
     }
 
-    // 改变身体大小
+    // Changing body size
     public void ChangeBodySize(float newSize)
     {
         if (body != null)
@@ -44,7 +44,7 @@ public class BananaManPartScaler : MonoBehaviour
         }
     }
 
-    // 改变左臂大小
+    // Change left arm size
     public void ChangeLeftArmSize(float newSize)
     {
         if (leftArm != null)
@@ -53,7 +53,7 @@ public class BananaManPartScaler : MonoBehaviour
         }
     }
 
-    // 改变右臂大小
+    // Change right arm size
     public void ChangeRightArmSize(float newSize)
     {
         if (rightArm != null)
@@ -62,7 +62,7 @@ public class BananaManPartScaler : MonoBehaviour
         }
     }
 
-    // 改变左腿大小
+    // Changing the size of the left leg
     public void ChangeLeftLegSize(float newSize)
     {
         if (leftLeg != null)
@@ -71,7 +71,7 @@ public class BananaManPartScaler : MonoBehaviour
         }
     }
 
-    // 改变右腿大小
+    // Changing the size of the right leg
     public void ChangeRightLegSize(float newSize)
     {
         if (rightLeg != null)
