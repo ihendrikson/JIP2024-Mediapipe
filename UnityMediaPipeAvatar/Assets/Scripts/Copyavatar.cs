@@ -1,69 +1,144 @@
 using UnityEngine;
+using System.Collections.Generic;
 
-public class HumanoidController : MonoBehaviour
+public class HumanoidCalculator : MonoBehaviour
 {
-    public GameObject originalModel; // Assign in the inspector
-    public Transform upperLeg; // Assign in the inspector
-    public Transform lowerLeg; // Assign in the inspector
-    public Transform foot; // Assign in the inspector
-    public float targetKneeAngle = 90f; // Adjust in the inspector
+    public SkinnedMeshRenderer skinnedMeshRenderer; // Assign in the inspector
+    public Color targetColor = Color.red;
+    public Color defaultColor = Color.white;
+    public GameObject avatarPrefab; // Assign the avatar prefab in the inspector
 
-    private GameObject clonedModel;
+    [System.Serializable]
+    public class AngleCalculator
+    {
+        public string name;
+        public Transform top;
+        public Transform middle;
+        public Transform bottom;
+        public float minAngle;
+        public float maxAngle;
+
+        public AngleCalculator(string name, Transform top, Transform middle, Transform bottom, float minAngle, float maxAngle)
+        {
+            this.name = name;
+            this.top = top;
+            this.middle = middle;
+            this.bottom = bottom;
+            this.minAngle = minAngle;
+            this.maxAngle = maxAngle;
+        }
+
+        // Calculate angle between top, middle, and bottom points
+        public float CalculateAngle()
+        {
+            if (top && middle && bottom)
+            {
+                Vector3 upperVec = top.position - middle.position;
+                Vector3 lowerVec = bottom.position - middle.position;
+                return Vector3.Angle(upperVec, lowerVec);
+            }
+            return 0f;
+        }
+
+        // Check if the angle is within the valid range
+        public bool IsAngleInRange(float angle) => angle >= minAngle && angle <= maxAngle;
+
+        // Determine the red intensity based on how far the angle is from the valid range
+        public float GetRedIntensity(float angle)
+        {
+            if (angle < minAngle) return Mathf.Clamp01((minAngle - angle) / 50f);
+            if (angle > maxAngle) return Mathf.Clamp01((angle - maxAngle) / 50f);
+            return 0f;
+        }
+    }
+
+    public List<AngleCalculator> angleCalculators = new List<AngleCalculator>();
 
     void Start()
     {
-        // Check if all necessary components are assigned
-        if (originalModel == null || upperLeg == null || lowerLeg == null || foot == null)
-        {
-            Debug.LogError("Please assign all necessary components in the inspector.");
-            return;
-        }
+        CreateAvatarAtMinAngle();
+    }
 
-        // Check if a clone already exists
-        if (clonedModel == null)
-        {
-            // Clone the model
-            clonedModel = CloneModel(originalModel);
+    void Update()
+    {
+        ResetAllVertexColors();
 
-            // Set the knee angle to the target angle
-            SetKneeAngle(clonedModel, targetKneeAngle);
+        foreach (var angleCalculator in angleCalculators)
+        {
+            float angle = angleCalculator.CalculateAngle();
+            float redIntensity = angleCalculator.GetRedIntensity(angle);
+            Color color = Color.Lerp(defaultColor, targetColor, redIntensity);
+
+            // Change color of vertices associated with the top bone
+            ChangeColor(angleCalculator.top, color);
         }
     }
 
-    public GameObject CloneModel(GameObject originalModel)
+    // Reset the colors of all vertices in the skinned mesh
+    private void ResetAllVertexColors()
     {
-        GameObject clone = Instantiate(originalModel);
-        // Remove this script from the clone to prevent further cloning
-        Destroy(clone.GetComponent<HumanoidController>());
-
-        // Place the clone 10 units to the right
-        clone.transform.position = originalModel.transform.position + new Vector3(10, 0, 0);
-
-        return clone;
+        if (skinnedMeshRenderer && skinnedMeshRenderer.sharedMesh)
+        {
+            Color[] vertexColors = new Color[skinnedMeshRenderer.sharedMesh.vertexCount];
+            for (int i = 0; i < vertexColors.Length; i++) vertexColors[i] = defaultColor;
+            skinnedMeshRenderer.sharedMesh.colors = vertexColors;
+        }
     }
 
-    public void SetKneeAngle(GameObject model, float targetAngle)
+    // Change the color of vertices corresponding to a given bone
+    private void ChangeColor(Transform targetBone, Color color)
     {
-        // Find the corresponding transforms in the cloned model
-        Transform clonedUpperLeg = model.transform.Find(upperLeg.name);
-        Transform clonedLowerLeg = model.transform.Find(lowerLeg.name);
-        Transform clonedFoot = model.transform.Find(foot.name);
+        if (!skinnedMeshRenderer || !targetBone) return;
 
-        if (clonedUpperLeg == null || clonedLowerLeg == null || clonedFoot == null)
+        Mesh mesh = skinnedMeshRenderer.sharedMesh;
+        if (mesh == null) return;
+
+        int boneIndex = GetBoneIndex(targetBone);
+        if (boneIndex == -1) return;
+
+        BoneWeight[] boneWeights = mesh.boneWeights;
+        Color[] vertexColors = mesh.colors;
+
+        for (int i = 0; i < boneWeights.Length; i++)
         {
-            Debug.LogError("Could not find the corresponding transforms in the cloned model.");
-            return;
+            if (boneWeights[i].boneIndex0 == boneIndex) vertexColors[i] = color;
         }
 
-        // Calculate the direction vectors
-        Vector3 upperLegDirection = clonedLowerLeg.position - clonedUpperLeg.position;
-        Vector3 lowerLegDirection = clonedFoot.position - clonedLowerLeg.position;
+        mesh.colors = vertexColors;
+    }
 
-        // Calculate the current angle
-        float currentAngle = Vector3.Angle(upperLegDirection, lowerLegDirection);
+    // Get the index of the bone in the skinned mesh renderer
+    private int GetBoneIndex(Transform bone)
+    {
+        Transform[] bones = skinnedMeshRenderer.bones;
+        for (int i = 0; i < bones.Length; i++)
+        {
+            if (bones[i] == bone) return i;
+        }
+        return -1;
+    }
 
-        // Calculate the rotation needed to set the angle to the target angle
-        float angleDifference = targetAngle - currentAngle;
-        clonedLowerLeg.RotateAround(clonedLowerLeg.position, Vector3.Cross(upperLegDirection, lowerLegDirection), angleDifference);
+    // Create a copy of the avatar at the minimum angle position
+    private void CreateAvatarAtMinAngle()
+    {
+        if (avatarPrefab == null) return;
+
+        GameObject avatarCopy = Instantiate(avatarPrefab, transform.position + Vector3.right * 2, transform.rotation);
+        foreach (var angleCalculator in angleCalculators)
+        {
+            float minAngle = angleCalculator.minAngle;
+            SetBoneAngle(avatarCopy.transform, angleCalculator, minAngle);
+        }
+    }
+
+    // Set the bone angles to the specified angle
+    private void SetBoneAngle(Transform avatarTransform, AngleCalculator angleCalculator, float angle)
+    {
+        Vector3 upperVec = angleCalculator.top.position - angleCalculator.middle.position;
+        Vector3 lowerVec = angleCalculator.bottom.position - angleCalculator.middle.position;
+        float currentAngle = Vector3.Angle(upperVec, lowerVec);
+
+        float angleDifference = angle - currentAngle;
+        angleCalculator.middle.Rotate(Vector3.forward, angleDifference);
     }
 }
