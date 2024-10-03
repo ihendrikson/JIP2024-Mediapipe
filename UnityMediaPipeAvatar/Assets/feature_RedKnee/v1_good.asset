@@ -1,0 +1,128 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f1260b785da3e24ebe737764cc33de0, type: 3}
+  m_Name: v1_good
+  m_EditorClassIdentifier: 
+  note: 
+  parentCalibrationData:
+  - bone: 14
+    data:
+      parentn: Banana Man/Armature/Hips/Spine 1/Spine 2/Spine 3/Right Shoulder/Right
+        Arm/
+      childn: Banana Man/Armature/Hips/Spine 1/Spine 2/Spine 3/Right Shoulder/Right
+        Arm/Right Forearm/
+      tparentn: PipeServer/Body Parent/RIGHT_SHOULDER/
+      tchildn: PipeServer/Body Parent/RIGHT_ELBOW/
+      initialDir: {x: -0.95697206, y: -0.29014575, z: 0.0044563306}
+      initialRotation: {x: -0.8008255, y: 0.58724517, z: 0.114374205, w: -0.027213484}
+      targetRotation: {x: 0, y: 0, z: 0, w: 0}
+  - bone: 16
+    data:
+      parentn: Banana Man/Armature/Hips/Spine 1/Spine 2/Spine 3/Right Shoulder/Right
+        Arm/Right Forearm/
+      childn: Banana Man/Armature/Hips/Spine 1/Spine 2/Spine 3/Right Shoulder/Right
+        Arm/Right Forearm/Right Hand/
+      tparentn: PipeServer/Body Parent/RIGHT_ELBOW/
+      tchildn: PipeServer/Body Parent/RIGHT_WRIST/
+      initialDir: {x: -0.81823355, y: -0.29301673, z: -0.49460596}
+      initialRotation: {x: -0.8312695, y: 0.54971397, z: 0.049449652, w: 0.06603655}
+      targetRotation: {x: 0, y: 0, z: 0, w: 0}
+  - bone: 2
+    data:
+      parentn: Banana Man/Armature/Hips/Right Thigh/
+      childn: Banana Man/Armature/Hips/Right Thigh/Right Leg/
+      tparentn: PipeServer/Body Parent/RIGHT_HIP/
+      tchildn: PipeServer/Body Parent/RIGHT_KNEE/
+      initialDir: {x: -0.004320962, y: -0.99961364, z: -0.027456876}
+      initialRotation: {x: 0.69967365, y: -0.09316039, z: -0.7083572, w: 0.0028137863}
+      targetRotation: {x: 0, y: 0, z: 0, w: 0}
+  - bone: 4
+    data:
+      parentn: Banana Man/Armature/Hips/Right Thigh/Right Leg/
+      childn: Banana Man/Armature/Hips/Right Thigh/Right Leg/Right Foot/
+      tparentn: PipeServer/Body Parent/RIGHT_KNEE/
+      tchildn: PipeServer/Body Parent/RIGHT_ANKLE/
+      initialDir: {x: -0.0041074627, y: -0.9531026, z: 0.30261967}
+      initialRotation: {x: 0.70234525, y: -0.07031709, z: -0.70820385, w: -0.0146301985}
+      targetRotation: {x: 0, y: 0, z: 0, w: 0}
+  - bone: 13
+    data:
+      parentn: Banana Man/Armature/Hips/Spine 1/Spine 2/Spine 3/Left Shoulder/Left
+        Arm/
+      childn: Banana Man/Armature/Hips/Spine 1/Spine 2/Spine 3/Left Shoulder/Left
+        Arm/Left Forearm/
+      tparentn: PipeServer/Body Parent/LEFT_SHOULDER/
+      tchildn: PipeServer/Body Parent/LEFT_ELBOW/
+      initialDir: {x: 0.9439893, y: -0.32953906, z: -0.01697764}
+      initialRotation: {x: -0.70748144, y: -0.45173582, z: 0.39226648, w: -0.3762074}
+      targetRotation: {x: 0, y: 0, z: 0, w: 0}
+  - bone: 15
+    data:
+      parentn: Banana Man/Armature/Hips/Spine 1/Spine 2/Spine 3/Left Shoulder/Left
+        Arm/Left Forearm/
+      childn: Banana Man/Armature/Hips/Spine 1/Spine 2/Spine 3/Left Shoulder/Left
+        Arm/Left Forearm/Left Hand/
+      tparentn: PipeServer/Body Parent/LEFT_ELBOW/
+      tchildn: PipeServer/Body Parent/LEFT_WRIST/
+      initialDir: {x: 0.84684145, y: -0.275106, z: -0.45516625}
+      initialRotation: {x: -0.831946, y: -0.5506873, z: -0.0363321, w: 0.05735767}
+      targetRotation: {x: 0, y: 0, z: 0, w: 0}
+  - bone: 1
+    data:
+      parentn: Banana Man/Armature/Hips/Left Thigh/
+      childn: Banana Man/Armature/Hips/Left Thigh/Left Leg/
+      tparentn: PipeServer/Body Parent/LEFT_HIP/
+      tchildn: PipeServer/Body Parent/LEFT_KNEE/
+      initialDir: {x: 0.020570917, y: -0.9986319, z: -0.048074123}
+      initialRotation: {x: 0.6934655, y: -0.004781306, z: -0.7144335, w: 0.093099475}
+      targetRotation: {x: 0, y: 0, z: 0, w: 0}
+  - bone: 3
+    data:
+      parentn: Banana Man/Armature/Hips/Left Thigh/Left Leg/
+      childn: Banana Man/Armature/Hips/Left Thigh/Left Leg/Left Foot/
+      tparentn: PipeServer/Body Parent/LEFT_KNEE/
+      tchildn: PipeServer/Body Parent/LEFT_ANKLE/
+      initialDir: {x: 0.057985473, y: -0.95398474, z: 0.2941951}
+      initialRotation: {x: 0.698244, y: 0.013632625, z: -0.71224594, w: 0.0705345}
+      targetRotation: {x: 0, y: 0, z: 0, w: 0}
+  spineUpDown:
+    parentn: Banana Man/Armature/Hips/Spine 1/
+    childn: Banana Man/Armature/Hips/Spine 1/Spine 2/Spine 3/Neck/
+    tparentn: VirtualHip/
+    tchildn: VirtualNeck/
+    initialDir: {x: -0.0052542067, y: 0.99532586, z: -0.09643115}
+    initialRotation: {x: -0.00043523416, y: 0.9999249, z: 0.012253046, w: 0.00017364025}
+    targetRotation: {x: 0, y: 0, z: 0, w: 0}
+  hipsTwist:
+    parentn: Banana Man/Armature/Hips/
+    childn: Banana Man/Armature/Hips/
+    tparentn: PipeServer/Body Parent/RIGHT_HIP/
+    tchildn: PipeServer/Body Parent/LEFT_HIP/
+    initialDir: {x: 0.9980492, y: 0.06192487, z: 0.007942193}
+    initialRotation: {x: 0.003571485, y: 0.9979733, z: -0.06353304, w: 0.00015989842}
+    targetRotation: {x: 0, y: 0, z: 0, w: 0}
+  chest:
+    parentn: Banana Man/Armature/Hips/Spine 1/Spine 2/
+    childn: Banana Man/Armature/Hips/Spine 1/Spine 2/
+    tparentn: PipeServer/Body Parent/RIGHT_HIP/
+    tchildn: PipeServer/Body Parent/LEFT_HIP/
+    initialDir: {x: 0.9980492, y: 0.06192487, z: 0.007942193}
+    initialRotation: {x: -0.0000035492776, y: 0.9997874, z: 0.02062592, w: 0.00017190157}
+    targetRotation: {x: 0, y: 0, z: 0, w: 0}
+  head:
+    parentn: Banana Man/Armature/Hips/Spine 1/Spine 2/Spine 3/Neck/
+    childn: Banana Man/Armature/Hips/Spine 1/Spine 2/Spine 3/Neck/Head/
+    tparentn: VirtualNeck/
+    tchildn: PipeServer/Body Parent/NOSE/
+    initialDir: {x: 0.061391238, y: 0.6740418, z: -0.7361377}
+    initialRotation: {x: -0.00006484476, y: 0.9690056, z: -0.24703911, w: 0.00016605649}
+    targetRotation: {x: 0, y: 0, z: 0, w: 0}
