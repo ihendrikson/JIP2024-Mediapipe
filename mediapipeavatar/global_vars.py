@@ -17,4 +17,4 @@ WIDTH = 320
 HEIGHT = 240
 
 # [0, 2] Higher numbers are more precise, but also cost more performance. The demo video used 2 (good environment is more important).
-MODEL_COMPLEXITY = 1
+MODEL_COMPLEXITY = 2
