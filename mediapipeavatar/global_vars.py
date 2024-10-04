@@ -2,7 +2,7 @@
 KILL_THREADS = False
 
 # Toggle this in order to view how your WebCam is being interpreted (reduces performance).
-DEBUG = True 
+DEBUG = False 
 
 # Change UDP connection settings (must match Unity side)
 USE_LEGACY_PIPES = False # Only supported on Windows (if True, use NamedPipes rather than UDP sockets)
@@ -17,4 +17,9 @@ WIDTH = 320
 HEIGHT = 240
 
 # [0, 2] Higher numbers are more precise, but also cost more performance. The demo video used 2 (good environment is more important).
-MODEL_COMPLEXITY = 2
+MODEL_COMPLEXITY = 1
+
+# Determines whether to use orbbec (depth camera) input or webcam
+USE_ORBBEC = True
+ORBBEC_CONNECTION_TIMEOUT = 15
+ALPHA_TEMPORAL = 0.999
